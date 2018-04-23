@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Verb frequency and DOM among Heritage Speakers of Spanish</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Esther Hur" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Verb frequency and DOM among Heritage Speakers of Spanish
+## ⚔<br/>with xaringan
+### Esther Hur
+### 2018/04/20
+
+---
+
+#Verbal Lexical Frequency and DOM in Heritage Speakers of Spanish
+
+
+## **Who are Heritage Speakers?**
+
+A subset of bilinguals who can be either simultaneous or sequential bilinguals “who learned a language other than English at home, but have been immersed in English since childhood, often exclusively schooled in it” (Wiley and Valdés, 2000, p. 80).
+
+---
+#Variability in HS Spanish
+
+--Gender agreement (Montrul, Foote &amp; Perpiñan, 2008)
+
+--Preterite and imperfect use (Silva-Corvalán, 1994; Montrul, 2002; Montrul &amp; Perpiñan, 2011) 
+
+--Subjunctive mood morphology (Giancaspro, 2017; Montrul, 2009; Perez-Cortés, 2016)
+
+--Differential Object Marking as expressed by ‘a’(Montrul 2004; Montrul and Bowles, 2009; Montrul &amp; Sanchez-Walker, 2013; Montrul, Bhatt &amp; Girju, 2015)
+
+---
+
+#What are the reasons?
+
+--Incomplete Acquisition (Montrul, 2002; 2009)
+
+--Attrition (Polinsky, 2006)
+
+--Actication Approach (Putnam and Sanchez, 2013)
+
+---
+# What is the the Differential Object Marking (DOM)?
+
+
+The overt marking of direct objects depending on the semantic and pragmatic features of the object. According to Bossong (1991), it is a phenomenon observed in at least 300 languages. It is conditioned by prominence: the higher in prominence a direct object, the more likely it is to be overtly case-marked.
+
+---
+### What about the Spanish DOM?
+
+Marked Object | Unmarked object 
+------------- | -------------------------------------------
+[+animate]  |  [+animate]  |  [-animate]  |  [-animate]  
+[+specific] |  [-specific] |  [+specific] | [-specific]
+ 
+    (1)Cuid-           o                a      la niña
+
+		  Take care-1.S.PRS (DOM) the girl
+		  
+		  'I'm taking care of the girl'
+    (2)Cuid-               o      una niña
+
+ 		   Take care-1.S.PRS a girl
+ 		   
+		  'I'm taking care of a girl'
+    (3)Cuid-            o          el carro de mi hermano
+
+	   	 Take care-1.S.PRS of my brother
+	   	 
+		  'I'm taking care of my brother's car'
+---
+# Incomplete Acquisition (Montrul 2002; 2009)
+
+--How much input is sufficient enough for a complete acquisition?
+
+--There is a need for a principled system of HS native language.
+
+---
+
+## RQ. Does lexical frequency of lexical activation play a role in the knowledge of DOM in animacy context among HS of Spanish in their productive knowledge?
+
+---
+# Participants
+
+Advanced HS (Adv. HS) = 20
+
+Intermediate HS (Int. HS) = 10
+
+Spanish Dominant Controls (SDC) = 15
+
+---
+# Results
+
+
+
+```
+## # A tibble: 3 x 5
+##   proficiency mean_response sd_score mean_countfreq sd_exp
+##   &lt;chr&gt;               &lt;dbl&gt;    &lt;dbl&gt;          &lt;dbl&gt;  &lt;dbl&gt;
+## 1 co                  0.996   0.0645         11446. 25369.
+## 2 hs_adv              0.441   0.497          11446. 25356.
+## 3 hs_int              0.144   0.352          11446. 25395.
+```
+---
+#### Figure 1 
+
+![](index_files/figure-html/graph-1.png)&lt;!-- --&gt;
+---
+# Nested Model Comparison
+
+
+
+
+```
+## Analysis of Variance Table
+## 
+## Model 1: eLog ~ 1
+## Model 2: eLog ~ countLog
+## Model 3: eLog ~ countLog + proficiency
+## Model 4: eLog ~ countLog * proficiency
+##   Res.Df    RSS Df Sum of Sq        F  Pr(&gt;F)    
+## 1    539 199.16                                  
+## 2    538 198.75  1     0.411   1.9703 0.16100    
+## 3    536 112.60  2    86.145 206.6365 &lt; 2e-16 ***
+## 4    534 111.31  2     1.294   3.1045 0.04566 *  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+---
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
