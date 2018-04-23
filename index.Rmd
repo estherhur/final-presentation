@@ -1,0 +1,207 @@
+---
+title: "Verb frequency and DOM among Heritage Speakers of Spanish "
+subtitle: "⚔<br/>with xaringan"
+author: "Esther Hur"
+date: "2018/04/20"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+#Verbal Lexical Frequency and DOM in Heritage Speakers of Spanish
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(lme4)
+library(lmerTest)
+```
+## **Who are Heritage Speakers?**
+
+A subset of bilinguals who can be either simultaneous or sequential bilinguals “who learned a language other than English at home, but have been immersed in English since childhood, often exclusively schooled in it” (Wiley and Valdés, 2000, p. 80).
+
+---
+#Variability in HS Spanish
+
+--Gender agreement (Montrul, Foote & Perpiñan, 2008)
+
+--Preterite and imperfect use (Silva-Corvalán, 1994; Montrul, 2002; Montrul & Perpiñan, 2011) 
+
+--Subjunctive mood morphology (Giancaspro, 2017; Montrul, 2009; Perez-Cortés, 2016)
+
+--Differential Object Marking as expressed by ‘a’(Montrul 2004; Montrul and Bowles, 2009; Montrul & Sanchez-Walker, 2013; Montrul, Bhatt & Girju, 2015)
+
+---
+
+#What are the reasons?
+
+--Incomplete Acquisition (Montrul, 2002; 2009)
+
+--Attrition (Polinsky, 2006)
+
+--Actication Approach (Putnam and Sanchez, 2013)
+
+---
+# What is the the Differential Object Marking (DOM)?
+
+
+The overt marking of direct objects depending on the semantic and pragmatic features of the object. According to Bossong (1991), it is a phenomenon observed in at least 300 languages. It is conditioned by prominence: the higher in prominence a direct object, the more likely it is to be overtly case-marked.
+
+---
+### What about the Spanish DOM?
+
+Marked Object | Unmarked object 
+------------- | -------------------------------------------
+[+animate]  |  [+animate]  |  [-animate]  |  [-animate]  
+[+specific] |  [-specific] |  [+specific] | [-specific]
+ 
+    (1)Cuid-           o                a      la niña
+
+		  Take care-1.S.PRS (DOM) the girl
+		  
+		  'I'm taking care of the girl'
+    (2)Cuid-               o      una niña
+
+ 		   Take care-1.S.PRS a girl
+ 		   
+		  'I'm taking care of a girl'
+    (3)Cuid-            o          el carro de mi hermano
+
+	   	 Take care-1.S.PRS of my brother
+	   	 
+		  'I'm taking care of my brother's car'
+---
+# Incomplete Acquisition (Montrul 2002; 2009)
+
+--How much input is sufficient enough for a complete acquisition?
+
+--There is a need for a principled system of HS native language.
+
+---
+
+## RQ. Does lexical frequency of lexical activation play a role in the knowledge of DOM in animacy context among HS of Spanish in their productive knowledge?
+
+---
+# Participants
+
+Advanced HS (Adv. HS) = 20
+
+Intermediate HS (Int. HS) = 10
+
+Spanish Dominant Controls (SDC) = 15
+
+---
+# Results
+
+```{r, include=FALSE}
+
+ept_df1 <- read_csv("../data/ept_raw.csv") %>% 
+  mutate(., groupCon = recode(group, co = 0.5, hs = -0.5), #porque 0.5?
+         freqCon = recode(frequency, f = 0.5, u = -0.5))
+
+ept_df2 <- read_csv("../data/ept_additional_data.csv") %>% 
+  mutate(., groupCon = recode(group, co = 0.5, hs = -0.5), 
+         freqCon = recode(frequency, f = 0.5, u = -0.5))
+         ept_df_temp <- rbind(ept_df1, ept_df2)
+
+
+verbs <- c('f1' = 'cuidar', 
+           'f2' = 'encontrar', 
+           'f3' = 'tocar', 
+           'f4' = 'aceptar', 
+           'f5' = 'medir', 
+           'f6' = 'parar', 
+           'f7' = 'llevar', 
+           'f8' = 'cambiar',
+           'u1' = 'vigilar',
+           'u2' = 'hallar', 
+           'u3' = 'acariciar', 
+           'u4' = 'acoger', 
+           'u5' = 'abrigar', 
+           'u6' = 'detener', 
+           'u7' = 'trasladar', 
+           'u8' = 'reemplazar')
+
+ept_df_temp$verbs <- verbs[ept_df_temp$item]
+ept_df <- read_csv("../data/prof_df.csv") %>% 
+  left_join(ept_df_temp, ., by = 'participant')
+
+# the new frequency counts from the Davis corpus
+countfreq <- c('f1' = 7531,
+               'f2' = 21725 , 
+               'f3' = 3861  , 
+               'f4' = 4098  , 
+               'f5' = 886, 
+               'f6' = 8174  , 
+               'f7' = 107445 , 
+               'f8' = 9871,
+               'u1' = 1197 ,
+               'u2' = 803, 
+               'u3' = 427 , 
+               'u4' = 2423, 
+               'u5' = 123 , 
+               'u6' = 5912, 
+               'u7' = 4402, 
+               'u8' = 4252)
+ept_df$countfreq <- countfreq[ept_df$item]
+
+ept_elog <- ept_df %>% 
+  group_by(., participant, proficiency, countfreq, groupCon, response, item) %>% 
+  summarize(., n = 8, 
+            wDOM = sum(response), 
+            woDOM = n - wDOM, 
+            eLog = log((wDOM + 0.5) / (n - wDOM + 0.5)), 
+            wts = 1 / (wDOM + 0.5) + 1 / (n - wDOM + 0.5),
+            countLog = log(countfreq))
+```
+```{r table, echo=FALSE}
+
+ept_df %>%
+           group_by(., proficiency) %>%
+           summarize(.,mean_response = mean(response), sd_score = sd(response),
+                     mean_countfreq =mean(countfreq), sd_exp = sd(countfreq)) 
+```
+---
+#### Figure 1 
+```{r elog, echo=FALSE}
+ept_elog2 <- ept_elog %>% filter(., item != "f2") %>%filter(., item != "f7") %>% filter(., item != "u3") %>% filter(., item != "u5")
+```
+```{r graph, fig.height=6, echo=FALSE}
+ept_elog2 %>%
+           ggplot(., aes(x = countLog, y = response, color = proficiency)) +
+           geom_point()+
+           geom_smooth(method =lm)+
+           scale_color_brewer(palette = "Set1")
+```
+---
+# Nested Model Comparison
+
+```{r clean, include=FALSE}
+ept_elog <- ept_df %>% 
+  group_by(., participant, proficiency, countfreq, groupCon, response, item) %>% 
+  summarize(., n = 8, 
+            wDOM = sum(response), 
+            woDOM = n - wDOM, 
+            eLog = log((wDOM + 0.5) / (n - wDOM + 0.5)), 
+            wts = 1 / (wDOM + 0.5) + 1 / (n - wDOM + 0.5),
+            countLog = log(countfreq))
+```  
+```{r mod, include=FALSE}
+mod_nul <- lm(eLog ~1, data = ept_elog2)
+summary(mod_nul)
+
+mod_cat <-lm(eLog ~ countLog, data = ept_elog2)
+summary(mod_cat)
+
+mod_con <-lm(eLog ~ countLog + proficiency, data = ept_elog2)
+summary(mod_con)
+
+mod_int <-lm(eLog ~ countLog * proficiency, data = ept_elog2)
+summary(mod_int)
+```
+```{r anova, echo=FALSE}
+anova(mod_nul, mod_cat, mod_con, mod_int)
+```
+---
