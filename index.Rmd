@@ -46,7 +46,6 @@ A subset of bilinguals who can be either simultaneous or sequential bilinguals â
 ---
 # What is the the Differential Object Marking (DOM)?
 
-
 The overt marking of direct objects depending on the semantic and pragmatic features of the object. According to Bossong (1991), it is a phenomenon observed in at least 300 languages. It is conditioned by prominence: the higher in prominence a direct object, the more likely it is to be overtly case-marked.
 
 ---
@@ -81,7 +80,7 @@ Marked Object | Unmarked object
 
 ---
 
-## RQ. Does lexical frequency of lexical activation play a role in the knowledge of DOM in animacy context among HS of Spanish in their productive knowledge?
+## RQ. Does verb frequency of lexical  activation play a role in the knowledge of DOM in animacy context among HS of Spanish in their productive knowledge?
 
 ---
 # Participants
@@ -91,6 +90,10 @@ Advanced HS (Adv. HS) = 20
 Intermediate HS (Int. HS) = 10
 
 Spanish Dominant Controls (SDC) = 15
+
+# Methodology
+
+Elicited Production Task
 
 ---
 # Results
@@ -168,7 +171,7 @@ ept_df %>%
 ```{r elog, echo=FALSE}
 ept_elog2 <- ept_elog %>% filter(., item != "f2") %>%filter(., item != "f7") %>% filter(., item != "u3") %>% filter(., item != "u5")
 ```
-```{r graph, fig.height=6, echo=FALSE}
+```{r graph, fig.height=7, echo=FALSE}
 ept_elog2 %>%
            ggplot(., aes(x = countLog, y = response, color = proficiency)) +
            geom_point()+
@@ -205,3 +208,13 @@ summary(mod_int)
 anova(mod_nul, mod_cat, mod_con, mod_int)
 ```
 ---
+# Best model
+
+```{r int, echo=FALSE}
+summary(mod_int)
+```
+---
+
+
+
+

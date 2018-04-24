@@ -49,7 +49,6 @@ A subset of bilinguals who can be either simultaneous or sequential bilinguals â
 ---
 # What is the the Differential Object Marking (DOM)?
 
-
 The overt marking of direct objects depending on the semantic and pragmatic features of the object. According to Bossong (1991), it is a phenomenon observed in at least 300 languages. It is conditioned by prominence: the higher in prominence a direct object, the more likely it is to be overtly case-marked.
 
 ---
@@ -84,7 +83,7 @@ Marked Object | Unmarked object
 
 ---
 
-## RQ. Does lexical frequency of lexical activation play a role in the knowledge of DOM in animacy context among HS of Spanish in their productive knowledge?
+## RQ. Does verb frequency of lexical  activation play a role in the knowledge of DOM in animacy context among HS of Spanish in their productive knowledge?
 
 ---
 # Participants
@@ -94,6 +93,10 @@ Advanced HS (Adv. HS) = 20
 Intermediate HS (Int. HS) = 10
 
 Spanish Dominant Controls (SDC) = 15
+
+# Methodology
+
+Elicited Production Task
 
 ---
 # Results
@@ -132,6 +135,34 @@ Spanish Dominant Controls (SDC) = 15
 ## 4    534 111.31  2     1.294   3.1045 0.04566 *  
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+---
+# Best model
+
+
+```
+## 
+## Call:
+## lm(formula = eLog ~ countLog * proficiency, data = ept_elog2)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -0.5284 -0.5209  0.0000  0.0000  1.1701 
+## 
+## Coefficients:
+##                              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)                -1.609e+00  3.381e-01  -4.760 2.49e-06 ***
+## countLog                   -1.270e-15  4.140e-02   0.000   1.0000    
+## proficiencyhs_adv          -7.231e-01  4.473e-01  -1.617   0.1065    
+## proficiencyhs_int          -2.198e+00  5.346e-01  -4.111 4.56e-05 ***
+## countLog:proficiencyhs_adv  3.015e-03  5.477e-02   0.055   0.9561    
+## countLog:proficiencyhs_int  1.450e-01  6.546e-02   2.214   0.0272 *  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.4566 on 534 degrees of freedom
+## Multiple R-squared:  0.4411,	Adjusted R-squared:  0.4359 
+## F-statistic: 84.29 on 5 and 534 DF,  p-value: &lt; 2.2e-16
 ```
 ---
     </textarea>
